@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     solution = copy.deepcopy(board)
 
-    for i in range(1):
+    for i in range(60):
         zero_to_eight = list(range(0, 9))
         row = b.random.choice(zero_to_eight)
         col = b.random.choice(zero_to_eight)
@@ -39,7 +39,8 @@ if __name__ == '__main__':
             check_sol = input('Do you want to see the solution? WARNING: LOOKING AT THE SOLUTION \nWILL END THE GAME![Y/N]: ')
 
         if check_sol == 'Y':
-            ss.print_board(solution)
+            print()
+            print('Better luck next time!')
             break
 
         letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
@@ -65,6 +66,10 @@ if __name__ == '__main__':
             print(type(input_num))
             input_num = input('Invalid number. Please enter a number 1-9: ')
         
-        curr_board[nums.index(guess_row)][letters.index(guess_col)] = input_num
+        curr_board[nums.index(guess_row)][letters.index(guess_col)] = int(input_num)
 
+    print()
+    ss.print_board(solution)
+    print()
     print('Thanks for playing Sudoku!')
+    print()

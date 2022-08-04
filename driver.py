@@ -2,9 +2,7 @@ import copy
 import board as b
 import sudoku_solver as ss
 
-if __name__ == '__main__':
-    print('Welcome to Sudoku!')
-
+def play():
     board = b.create_board()
     is_valid = ss.solve_sudoku(board)
 
@@ -76,8 +74,20 @@ if __name__ == '__main__':
         # update curr_board which is separate from solution and board
         curr_board[nums.index(guess_row)][letters.index(guess_col)] = int(input_num)
 
-    print()
     ss.print_board(solution)
     print()
+    play_again = input('Would you like to play again? [Y/N]: ')
+    while play_again != 'Y' and play_again != 'N':
+        print('Invalid input. Please enter "Y" or "N".')
+        play_again = input('Would you like to play again? [Y/N]: ')
+    if play_again == 'Y':
+        play()
+    else:
+        print()
+
+if __name__ == '__main__':
+    print('Welcome to Sudoku!')
+    print()
+    play()
     print('Thanks for playing Sudoku!')
     print()

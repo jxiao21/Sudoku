@@ -1,7 +1,5 @@
 import random
 import copy
-
-from matplotlib.pyplot import fill
 import sudoku_solver as ss
 
 def create_board():

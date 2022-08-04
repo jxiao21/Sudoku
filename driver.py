@@ -1,6 +1,4 @@
 import copy
-
-from tabnanny import check
 import board as b
 import sudoku_solver as ss
 

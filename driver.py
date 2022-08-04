@@ -17,22 +17,29 @@ if __name__ == '__main__':
         is_valid = ss.solve_sudoku(board)
     print()
 
+    # store solved board in separate deep copy
     solution = copy.deepcopy(board)
 
+    # remove random values from solved board
+    # keeping board as is for the entire game so we know which values were
+    # originally on the board
     for i in range(60):
         zero_to_eight = list(range(0, 9))
         row = b.random.choice(zero_to_eight)
         col = b.random.choice(zero_to_eight)
         board[row][col] = -1
     
+    # store unsolved board in separate deep copy
     curr_board = copy.deepcopy(board)
     print()
 
+    # sorted works since every list in solution should have exact same values and rows
     while sorted(solution) != sorted(curr_board):
         print()
         ss.print_board(curr_board)
         print()
 
+        # if user wants to quit, break out of loop
         check_sol = input('Do you want to see the solution? WARNING: LOOKING AT THE SOLUTION \nWILL END THE GAME! [Y/N]: ')
         while check_sol != 'N' and check_sol != 'Y':
             print('Invalid input. Please enter "Y" or "N".')
@@ -43,9 +50,11 @@ if __name__ == '__main__':
             print('Better luck next time!')
             break
 
+        # store column and row values
         letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
         nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
+        # get user input and check for invalid inputs
         guess_col = input('Enter a column letter: ')
         while guess_col not in letters:
             print()
@@ -66,6 +75,7 @@ if __name__ == '__main__':
             print(type(input_num))
             input_num = input('Invalid number. Please enter a number 1-9: ')
         
+        # update curr_board which is separate from solution and board
         curr_board[nums.index(guess_row)][letters.index(guess_col)] = int(input_num)
 
     print()

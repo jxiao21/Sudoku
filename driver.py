@@ -30,31 +30,45 @@ def play():
     print()
 
     # sorted works since every list in solution should have exact same values and rows
+    check_sol_prompt = 0
     while sorted(solution) != sorted(curr_board):
         print()
         ss.print_board(curr_board)
         print()
 
-        # if user wants to quit, break out of loop
-        check_sol = input('Do you want to see the solution? WARNING: LOOKING AT THE SOLUTION \nWILL END THE GAME! [Y/N]: ')
-        while check_sol != 'N' and check_sol != 'Y':
-            print('Invalid input. Please enter "Y" or "N".')
-            check_sol = input('Do you want to see the solution? WARNING: LOOKING AT THE SOLUTION \nWILL END THE GAME![Y/N]: ')
+        # if user wants to quit, break out of loop; check every 5 moves
+        if check_sol_prompt % 5 == 0:
+            check_sol = input('Do you want to see the solution? WARNING: LOOKING AT THE SOLUTION \nWILL END THE GAME! [Y/N]: ')
+            while check_sol != 'N' and check_sol != 'Y':
+                print('Invalid input. Please enter "Y" or "N".')
+                check_sol = input('Do you want to see the solution? WARNING: LOOKING AT THE SOLUTION \nWILL END THE GAME![Y/N]: ')
 
-        if check_sol == 'Y':
-            print()
-            print('Better luck next time!')
-            break
+            if check_sol == 'Y':
+                print()
+                print('Better luck next time!')
+                break
 
         # store column and row values
-        letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+        letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'board']
         nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
         # get user input and check for invalid inputs
-        guess_col = input('Enter a column letter: ')
+        print('Please enter "BOARD" to see the original board OR')
+        guess_col = input('Enter a column letter: ').lower()
         while guess_col not in letters:
             print()
-            guess_col = input('Invalid input. Please enter a column letter A-I: ')
+            guess_col = input('Invalid input. Please enter a column letter A-I or "BOARD": ')
+        
+        if guess_col == 'board':
+            print()
+            print('ORIGINAL BOARD:')
+            print()
+            ss.print_board(board)
+            print()
+            print('     ', end='')
+            print('=' * 49)
+            print()
+            continue
         
         guess_row = input('Enter a row number: ')
         while guess_row not in nums:
@@ -73,6 +87,7 @@ def play():
         
         # update curr_board which is separate from solution and board
         curr_board[nums.index(guess_row)][letters.index(guess_col)] = int(input_num)
+        check_sol_prompt += 1
 
     ss.print_board(solution)
     print()

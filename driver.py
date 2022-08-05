@@ -88,6 +88,8 @@ def play():
         # update curr_board which is separate from solution and board
         curr_board[nums.index(guess_row)][letters.index(guess_col)] = int(input_num)
         check_sol_prompt += 1
+        if sorted(solution) == sorted(curr_board):
+            print('Congrats! You win!')
 
     ss.print_board(solution)
     print()
